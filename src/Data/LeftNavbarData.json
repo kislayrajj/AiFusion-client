@@ -1,0 +1,6 @@
+[
+  { "title": "menu", "icon": "fa-solid fa-bars" , "route" : "/menu"},
+  { "title": "chats", "icon": "fa-solid fa-comments", "route" : "/chats" },
+  { "title": "AI Bots", "icon": "fa-solid fa-hexagon-nodes", "route" : "/ai-bots" },
+  { "title": "status", "icon": "fa-solid fa-circle-notch", "route" : "/status" }
+]
