@@ -62,7 +62,7 @@ const ChatWindow = ({ bot }) => {
 
     try {
       const response = await axios.post(
-        "${API_BASE_URL}/api/chat/sendMessage",
+        `${API_BASE_URL}/api/chat/sendMessage`,
         {
           message: input,
           bot: bot.title,
