@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import axios from "axios";
 import API_BASE_URL from "../../../config";
 
-const socket = io("http://localhost:8000");
+const socket = io(API_BASE_URL);
 
 const ChatWindow = ({ bot }) => {
   const [messages, setMessages] = useState([]);
