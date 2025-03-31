@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import axios from "axios";
+import API_BASE_URL from "../../../config";
 
 const socket = io("http://localhost:8000");
 
@@ -19,7 +20,7 @@ const ChatWindow = ({ bot }) => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/chat/getMessage?bot=${bot.title}`)
+      .get(`${API_BASE_URL}/api/chat/getMessage?bot=${bot.title}`)
       .then((response) => {
         setMessages(response.data);
         scrollToBottom()
@@ -61,7 +62,7 @@ const ChatWindow = ({ bot }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/chat/sendMessage",
+        "${API_BASE_URL}/api/chat/sendMessage",
         {
           message: input,
           bot: bot.title,
@@ -90,7 +91,7 @@ const ChatWindow = ({ bot }) => {
   // delete msg
   const deleteMessage = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/bot/deleteMessage/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/bot/deleteMessage/${id}`);
       setMessages(messages.filter((msg) => msg._id !== id));
     } catch (error) {
       console.error("Error deleting message:", error);
@@ -113,7 +114,7 @@ const ChatWindow = ({ bot }) => {
 
     try {
       await axios.delete(
-        `http://localhost:8000/api/bot/clearChat?bot=${bot.title}`
+        `${API_BASE_URL}/api/bot/clearChat?bot=${bot.title}`
       );
       setMessages([]);
     } catch (error) {
