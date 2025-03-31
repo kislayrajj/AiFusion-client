@@ -2,5 +2,6 @@
   { "title": "menu", "icon": "fa-solid fa-bars" , "route" : "/menu"},
   { "title": "chats", "icon": "fa-solid fa-comments", "route" : "/chats" },
   { "title": "AI Bots", "icon": "fa-solid fa-hexagon-nodes", "route" : "/ai-bots" },
+  { "title": "AI Experts", "icon": "fa-solid fa-handshake-angle", "route" : "/ai-experts" },
   { "title": "status", "icon": "fa-solid fa-circle-notch", "route" : "/status" }
 ]

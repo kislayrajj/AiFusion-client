@@ -1,4 +1,14 @@
 @import "tailwindcss";
+
+/* @theme {
+  --color-customBlue:"0 20px 50px rgba(8, 112, 184, 0.7)"
+} */
+
+@layer utilities{
+  .custom-blue{
+    box-shadow: 0 20px 50px rgba(8, 112, 184, 0.7);
+  }
+}
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -12,4 +22,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.custom-gradient {
+  background: linear-gradient(to right, #0870B8, #00D4FF);
 }
