@@ -1,23 +1,32 @@
 import React, { useState } from "react";
 import AI_Bots_data from "../Data/bots/bots_data";
 import ChatWindow from "./Bots/ChatWindow"
-
+import AiBotsLanding from "../components/home/AiBotsLanding";
 const AI_Bots = () => {
   const [selectedBot, setSelectedBot] = useState(null);
+//   const [aiBotBar, setAiBotBar] = useState("true")
+
+//   const handleAiBotBar=()=>{
+// setAiBotBar(!aiBotBar)
+//   }
 
   return (
-    <div className=" flex w-full">
+    <div className="flex w-full ">
       {/* Left Side: AI Bots List */}
-      <div className=" border p-0.5 md:p-2">
-        <div className="flex flex-col md:flex-row justify-between items-center md:gap-12">
+      <div className="border border-r-0 p-0.5 md:p-2 lg:min-w-[350px]">
+        <div className="flex flex-col md:flex-row justify-between items-center flex-wrap md:flex-nowrap md:gap-12 relative">
           <div className="text-sm md:text-xl">AI Bots</div>
           <div>
-            <input
+            {/* <input
               type="search"
               placeholder="search"
-              className="border rounded outline-none p-0.5 md:p-1 w-20 md:w-auto"
-            />
+              className="border rounded outline-none p-0.5 md:p-1 w-20 sm:w-28 md:w-auto"
+            /> */}
           </div>
+          {/* <div className="absolute top-1 -right-3 ">
+          <i className="fa-solid fa-chevron-right"></i>
+          <i className="fa-solid fa-chevron-left"></i>
+          </div> */}
         </div>
         <div className="p-1 pt-6 md:pt-12 flex flex-col gap-2">
           {AI_Bots_data?.map((bot, idx) => (
@@ -46,11 +55,11 @@ const AI_Bots = () => {
       </div>
 
       {/* Right Side: Render ChatWindow Component */}
-      <div className="w-2/3 border p-4">
+      <div className="w-full border p-4">
         {selectedBot ? (
           <ChatWindow bot={selectedBot} />
         ) : (
-          <p className="text-gray-500">Select a bot to start chatting</p>
+        <AiBotsLanding/>
         )}
       </div>
     </div>

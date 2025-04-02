@@ -1,3 +1,8 @@
+import mistralAiLogo from "../../assets/logos/mistral-color.png"
+import gemmaAiLogo from "../../assets/logos/gemini-color.png"
+import metaAiLogo from "../../assets/logos/meta-ai-logo.png"
+import fastGptAiLogo from "../../assets/logos/fast-gpt-ai.png"
+import EleutherAINeo from "../../assets/logos/eleutherai-logo-neo.png"
 const bots = [
   {
     name: "Mistral Chat",
@@ -7,7 +12,7 @@ const bots = [
     provider: "Mistral AI",
     description: "A smart and efficient AI model for conversations and tasks.",
     api_url: "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct",
-    // logo: mistralLogo
+    logo: mistralAiLogo
   },
   {
     name: "Meta AI Chat",
@@ -17,7 +22,7 @@ const bots = [
     provider: "Meta AI",
     description: "An AI chatbot by Meta, designed for engaging and informative conversations.",
     api_url: "https://api-inference.huggingface.co/models/meta-llama/Llama-2-7b-chat-hf",
-    // logo: llamaLogo
+    logo: metaAiLogo
   },
   {
     name: "Google AI Chat",
@@ -27,7 +32,7 @@ const bots = [
     provider: "Google DeepMind",
     description: "A conversational AI model by Google for smart and helpful responses.",
     api_url: "https://api-inference.huggingface.co/models/google/gemma-2b",
-    // logo: openChatLogo
+    logo: gemmaAiLogo
   },
   {
     name: "Fast GPT Chat",
@@ -37,7 +42,7 @@ const bots = [
     provider: "OpenAI (Distilled Version)",
     description: "A lightweight AI chatbot for quick and simple conversations.",
     api_url: "https://api-inference.huggingface.co/models/distilgpt2",
-    // logo: openChatLogo
+    logo: fastGptAiLogo
   },
   {
     name: "Neo Chatbot",
@@ -47,7 +52,7 @@ const bots = [
     provider: "EleutherAI",
     description: "An open-source AI chatbot for general conversations and text generation.",
     api_url: "https://api-inference.huggingface.co/models/EleutherAI/gpt-neo-2.7B",
-    // logo: togetherLogo
+    logo: EleutherAINeo
   }
 ];
 

@@ -3,7 +3,13 @@ import io from "socket.io-client";
 import axios from "axios";
 import API_BASE_URL from "../../../config";
 
-const socket = io(API_BASE_URL);
+const socket = io(API_BASE_URL, {
+  path: "/socket.io/",
+  transports: ["websocket", "polling"],
+  withCredentials: true,
+});
+socket.on("connect", () => console.log("✅ WebSocket connected!"));
+socket.on("disconnect", () => console.log("❌ WebSocket disconnected!"));
 
 const ChatWindow = ({ bot }) => {
   const [messages, setMessages] = useState([]);
@@ -120,12 +126,11 @@ const ChatWindow = ({ bot }) => {
     } catch (error) {
       console.error("Error clearing chat:", error);
     }
-  };
-
+  }; 
   return (
-    <div className="flex flex-col w-full h-[95vh] shadow-lg rounded-lg">
+    <div className="flex flex-col w-full h-[90vh] shadow-lg rounded-lg">
       <div className="text-white py-3 px-5 flex items-center justify-between bg-gray-800">
-        <div>
+        <div title={bot?.description}>
 
         <h2 className="text-lg font-semibold">{bot.name} </h2>
         <div className="text-sm text-gray-500">{bot?.provider}</div>
