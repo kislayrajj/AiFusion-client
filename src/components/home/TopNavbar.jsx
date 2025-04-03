@@ -8,7 +8,7 @@ const TopNavbar = () => {
           <div>
             <i className="fa-brands fa-rocketchat"> </i>
           </div>
-          <div>AI Fusion</div>
+          <div><a href="/">AI Fusion</a></div>
         </div>
       </div>
       

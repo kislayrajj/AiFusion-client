@@ -15,14 +15,16 @@ const home = () => {
       <TopNavbar />
       <div className="flex">
         <LeftNavbar />
+     
         <Routes>
+          <Route path="/" element={<Hero/>} />
         <Route path="/menu" element={<Menu />}/>
         <Route path="/chats" element={<Chats />}/>
         <Route path="/ai-bots" element={<Ai_Bots />}/>
         <Route path="/status" element={<Status />}/>
         <Route path="/ai-experts" element={<AI_Experts />}/>
         </Routes>
-        <Hero />
+        
       </div>
     </div>
   );

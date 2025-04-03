@@ -11,7 +11,7 @@ const AiBotsLanding = () => {
       </h1>
       <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg flex flex-col items-center">
         <div className="flex items-center gap-3 ">
-          <i class="fa-regular fa-hand-point-left"></i>
+          <i className="fa-regular fa-hand-point-left"></i>
           <h2 className="text-xl font-semibold">Select an AI to continue</h2>
         </div>
         <p className="text-gray-300 mt-2">
