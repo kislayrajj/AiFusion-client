@@ -2,14 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import axios from "axios";
 import API_BASE_URL from "../../../config";
+import { motion } from "framer-motion";
 
 const socket = io(API_BASE_URL, {
   path: "/socket.io/",
   transports: ["websocket", "polling"],
   withCredentials: true,
 });
-socket.on("connect", () => console.log("✅ WebSocket connected!"));
-socket.on("disconnect", () => console.log("❌ WebSocket disconnected!"));
+socket.on("connect", () => console.log("WebSocket connected!"));
+socket.on("disconnect", () => console.log("WebSocket disconnected!"));
 
 const ChatWindow = ({ bot }) => {
   const [messages, setMessages] = useState([]);
@@ -29,7 +30,7 @@ const ChatWindow = ({ bot }) => {
       .get(`${API_BASE_URL}/api/chat/getMessage?bot=${bot.title}`)
       .then((response) => {
         setMessages(response.data);
-        scrollToBottom()
+        scrollToBottom();
       })
       .catch((error) => console.error("Error fetching messages:", error));
 
@@ -37,8 +38,7 @@ const ChatWindow = ({ bot }) => {
 
     socket.on(botEvent, (msg) => {
       setMessages((prevMessages) => [...prevMessages, msg]);
-      scrollToBottom()
-
+      scrollToBottom();
     });
 
     return () => {
@@ -58,8 +58,7 @@ const ChatWindow = ({ bot }) => {
     setMessages((prevMessages) => [...prevMessages, newMessage]);
     setInput("");
     setLoading(true);
-    scrollToBottom()
-
+    scrollToBottom();
 
     // Emit bot-specific event
     const botEvent = `chat message ${bot.title}`;
@@ -78,12 +77,20 @@ const ChatWindow = ({ bot }) => {
         sender: bot.title,
         message: response.data.botReply,
         bot: bot.title,
+        _id: response.data.botMessageId,
       };
 
+      setMessages((prevMessages) =>
+        prevMessages.map((msg) =>
+          msg === newMessage
+            ? { ...msg, _id: response.data.userMessageId }
+            : msg
+        )
+      );
       // Emit bot response through socket
       socket.emit(botEvent, botReply);
 
-      // **Immediately update state to show bot's response without refresh**
+      // Immediately update state to show bot's response without refresh
       setMessages((prevMessages) => [...prevMessages, botReply]);
 
       console.log("Bot response:", response.data.botReply);
@@ -96,9 +103,15 @@ const ChatWindow = ({ bot }) => {
 
   // delete msg
   const deleteMessage = async (id) => {
+    if (!id) {
+      console.error("Cannot delete message without an ID.");
+      return;
+    }
     try {
       await axios.delete(`${API_BASE_URL}/api/bot/deleteMessage/${id}`);
-      setMessages(messages.filter((msg) => msg._id !== id));
+      setMessages((prevMessages) =>
+        prevMessages.filter((msg) => msg._id !== id)
+      );
     } catch (error) {
       console.error("Error deleting message:", error);
     }
@@ -119,21 +132,18 @@ const ChatWindow = ({ bot }) => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(
-        `${API_BASE_URL}/api/bot/clearChat?bot=${bot.title}`
-      );
+      await axios.delete(`${API_BASE_URL}/api/bot/clearChat?bot=${bot.title}`);
       setMessages([]);
     } catch (error) {
       console.error("Error clearing chat:", error);
     }
-  }; 
+  };
   return (
     <div className="flex flex-col w-full h-[90vh] shadow-lg rounded-lg">
       <div className="text-white py-3 px-5 flex items-center justify-between bg-gray-800">
         <div title={bot?.description}>
-
-        <h2 className="text-lg font-semibold">{bot.name} </h2>
-        <div className="text-sm text-gray-500">{bot?.provider}</div>
+          <h2 className="text-lg font-semibold">{bot.name} </h2>
+          <div className="text-sm text-gray-500">{bot?.provider}</div>
         </div>
         <button
           onClick={clearChat}
@@ -144,8 +154,12 @@ const ChatWindow = ({ bot }) => {
 
       <div className="flex-1 overflow-y-auto p-4 space-y-2">
         {messages.map((msg, idx) => (
-          <div
+          <motion.div
             key={idx}
+            initial={{ opacity: 0, x: msg.sender === "User" ? 50 : -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: msg.sender === "User" ? 50 : -50 }}
+            transition={{ duration: 0.3 }}
             className={`flex ${
               msg.sender === "User" ? "justify-end" : "justify-start"
             }`}>
@@ -165,7 +179,7 @@ const ChatWindow = ({ bot }) => {
                 <i className="fa-solid fa-trash-can"></i>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
 
         {loading && (
