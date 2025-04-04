@@ -140,8 +140,14 @@ const ChatWindow = ({ bot }) => {
   };
   return (
     <div className="flex flex-col w-full h-[90vh] shadow-lg rounded-lg">
-      <div className="text-white py-3 px-5 flex items-center justify-between bg-gray-800">
-        <div title={bot?.description}>
+      <motion.div 
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="text-white py-3 px-5 flex items-center justify-between bg-gray-800">
+        <div
+         
+         title={bot?.description}>
           <h2 className="text-lg font-semibold">{bot.name} </h2>
           <div className="text-sm text-gray-500">{bot?.provider}</div>
         </div>
@@ -150,7 +156,7 @@ const ChatWindow = ({ bot }) => {
           className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 text-sm opacity-80 hover:opacity-100">
           Clear Chat
         </button>
-      </div>
+      </motion.div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-2">
         {messages.map((msg, idx) => (

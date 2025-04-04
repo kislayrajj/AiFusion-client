@@ -27,7 +27,10 @@ const ExpertChatWindow = ({ expert }) => {
     axios
       .get(`${API_BASE_URL}/api/experts/getMessage?expert=${expert.title}`)
       .then((response) => {
-        setMessages((prev) => ({ ...prev, [expert.title]: response.data || [] }));
+        setMessages((prev) => ({
+          ...prev,
+          [expert.title]: response.data || [],
+        }));
         scrollToBottom();
       })
       .catch((error) => console.error("Error fetching messages:", error));
@@ -63,10 +66,13 @@ const ExpertChatWindow = ({ expert }) => {
     scrollToBottom();
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/experts/sendMessage`, {
-        message: input,
-        bot: expert.title, // Send correct system name
-      });
+      const response = await axios.post(
+        `${API_BASE_URL}/api/experts/sendMessage`,
+        {
+          message: input,
+          bot: expert.title, // Send correct system name
+        }
+      );
 
       const expertReply = {
         sender: expert.name,
@@ -89,23 +95,33 @@ const ExpertChatWindow = ({ expert }) => {
 
   return (
     <div className="flex flex-col w-full h-[90vh] shadow-lg rounded-lg">
-      <div className="text-white py-3 px-5 flex items-center justify-between bg-gray-800">
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="text-white py-3 px-5 flex items-center justify-between bg-gray-800">
         <h2 className="text-lg font-semibold">{expert.title}</h2>
         <button
-          onClick={() => setMessages((prev) => ({ ...prev, [expert.title]: [] }))}
+          onClick={() =>
+            setMessages((prev) => ({ ...prev, [expert.title]: [] }))
+          }
           className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 text-sm opacity-80 hover:opacity-100">
           Clear Chat
         </button>
-      </div>
+      </motion.div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-2">
         {(messages[expert.title] || []).map((msg, idx) => (
           <div
             key={idx}
-            className={`flex ${msg.sender === "User" ? "justify-end" : "justify-start"}`}>
+            className={`flex ${
+              msg.sender === "User" ? "justify-end" : "justify-start"
+            }`}>
             <div
               className={`relative p-3 rounded-lg max-w-xs text-white ${
-                msg.sender === "User" ? "bg-violet-500 rounded-br-none" : "bg-gray-500 rounded-bl-none"
+                msg.sender === "User"
+                  ? "bg-violet-500 rounded-br-none"
+                  : "bg-gray-500 rounded-bl-none"
               }`}>
               <strong className="block text-sm">{msg.sender}</strong>
               <div>{msg.message}</div>
@@ -132,7 +148,9 @@ const ExpertChatWindow = ({ expert }) => {
           placeholder="Type a message..."
           className="flex-1 p-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
         />
-        <button onClick={sendMessage} className="ml-2 bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700">
+        <button
+          onClick={sendMessage}
+          className="ml-2 bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700">
           Send
         </button>
       </div>

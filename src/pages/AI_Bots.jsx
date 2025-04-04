@@ -14,7 +14,9 @@ const AI_Bots = () => {
   return (
     <div className="flex w-full overflow-hidden">
       {/* Left Side: AI Bots List */}
-      <div className="border border-r-0 p-0.5 md:p-2 lg:min-w-[350px]">
+      <div
+    
+       className="border border-r-0 p-0.5 md:p-2 lg:min-w-[350px]">
         <div className="flex flex-col md:flex-row justify-between items-center flex-wrap md:flex-nowrap md:gap-12 relative">
           <motion.div
                initial={{ opacity: 0, y: -50 }}
