@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import axios from "axios";
 import API_BASE_URL from "../../../config";
+import { motion } from "framer-motion";
 
 const socket = io(API_BASE_URL, {
   transports: ["websocket", "polling"],
