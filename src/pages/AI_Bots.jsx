@@ -12,7 +12,7 @@ const AI_Bots = () => {
   //   }
 
   return (
-    <div className="flex w-full overflow-hidden">
+    <div className="flex w-full h-[94vh] overflow-hidden">
       {/* Left Side: AI Bots List */}
       <div
     
@@ -34,6 +34,7 @@ const AI_Bots = () => {
           <i className="fa-solid fa-chevron-right"></i>
           <i className="fa-solid fa-chevron-left"></i>
           </div> */}
+          
         </div>
         <div className="p-1 pt-6 md:pt-12 flex flex-col gap-2 overflow-hidden">
           {AI_Bots_data?.map((bot, idx) => (

@@ -170,7 +170,7 @@ const ChatWindow = ({ bot }) => {
               msg.sender === "User" ? "justify-end" : "justify-start"
             }`}>
             <div
-              className={`relative p-3 rounded-lg max-w-xs text-white ${
+              className={`relative p-3 rounded-lg w-fit max-w-1/2   text-white ${
                 msg.sender === "User"
                   ? "bg-violet-500 rounded-br-none"
                   : "bg-gray-500 rounded-bl-none"
